@@ -71,4 +71,15 @@ public class Protagonista
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
+
+    //Mostrar los datos elegidos
+
+    public static void main(String[] args)
+    {
+        Protagonista Gustave = new Protagonista ("Gustave", 100, 10, 20, 1);
+
+        System.out.println("--------------------------------");
+        Gustave.mostrarDatos();
+        System.out.println("--------------------------------");
+    }
 }
