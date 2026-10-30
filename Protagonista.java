@@ -1,68 +1,31 @@
-public class Protagonista
+public class Protagonista extends Personaje
 {
     //Atributos
 
-    String nombre;
-    int vida;
-    int dañoMin;
-    int dañoMax;
     int nivel;
 
     //Contructores
 
-    public Protagonista(String nombre, int vida, int dañoMin, int dañoMax, int nivel)
+    public Protagonista(String nombre, int vidaMax, int vidaActual, int ataqueMin, int ataqueMax, int nivel)
     {
-        this.nombre = nombre;
-        this.vida = vida;
-        this.dañoMin = dañoMin;
-        this.dañoMax = dañoMax;
+        super(nombre, vidaMax, vidaActual, ataqueMin, ataqueMax);
         this.nivel = nivel;
     }
 
     //Métodos
 
+    @Override 
     public void mostrarDatos()
     {
-        System.out.println("Nombre: " + nombre);
-        System.out.println("Vida: " + vida);
-        System.out.println("Daño mínimo: " + dañoMin);
-        System.out.println("Daño máximo: " + dañoMax);
+        System.out.println("Nombre: " + getNombre());
+        System.out.println("Vida Máxima: " + getVidaMax());
+        System.out.println("Vida Actual: " + getVidaActual());
+        System.out.println("Daño mínimo: " + getAtaqueMin());
+        System.out.println("Daño máximo: " + getAtaqueMax());
         System.out.println("Nivel: " + nivel);
     }
 
     //Getters y Setters
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getVida() {
-        return vida;
-    }
-
-    public void setVida(int vida) {
-        this.vida = vida;
-    }
-
-    public int getDañoMin() {
-        return dañoMin;
-    }
-
-    public void setDañoMin(int dañoMin) {
-        this.dañoMin = dañoMin;
-    }
-
-    public int getDañoMax() {
-        return dañoMax;
-    }
-
-    public void setDañoMax(int dañoMax) {
-        this.dañoMax = dañoMax;
-    }
 
     public int getNivel() {
         return nivel;
@@ -70,16 +33,5 @@ public class Protagonista
 
     public void setNivel(int nivel) {
         this.nivel = nivel;
-    }
-
-    //Mostrar los datos elegidos
-
-    public static void main(String[] args)
-    {
-        Protagonista Gustave = new Protagonista ("Gustave", 100, 10, 20, 1);
-
-        System.out.println("--------------------------------");
-        Gustave.mostrarDatos();
-        System.out.println("--------------------------------");
     }
 }
