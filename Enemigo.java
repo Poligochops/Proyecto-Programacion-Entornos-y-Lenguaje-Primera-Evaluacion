@@ -45,4 +45,22 @@ public class Enemigo extends Personaje
     public void setPuntuacionSoltadaRanking(int puntuacionSoltadaRanking) {
         this.puntuacionSoltadaRanking = puntuacionSoltadaRanking;
     }
+
+    //Mostrar los datos
+
+    public static void main(String[] args)
+    {
+
+        Enemigo Nevron = new Enemigo ("Nevron", 70, 70, 10, 15, 30, 100);
+        Enemigo NevronVolador = new Enemigo ("Nevron Volador", 50, 50, 15, 20, 40, 100);
+        Enemigo Petank = new Enemigo ("Petank", 200, 200, 5, 10, 150, 100);
+
+        System.out.println("---------------------------");
+        Nevron.mostrarDatos();
+        System.out.println("---------------------------");
+        NevronVolador.mostrarDatos();
+        System.out.println("---------------------------");
+        Petank.mostrarDatos();
+        System.out.println("---------------------------");
+    }
 }

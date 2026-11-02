@@ -30,6 +30,10 @@ public class Personaje
         System.out.println("Daño máximo: " + ataqueMax);
     }
 
+    public void atacar()
+    {
+    }
+
     //Getters y Setters
 
     public String getNombre() {
