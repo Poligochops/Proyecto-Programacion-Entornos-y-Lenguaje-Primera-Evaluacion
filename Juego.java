@@ -23,6 +23,7 @@ public class Juego
             System.out.print("Opción: ");
 
             //En caso de que no sea un número lo que se escribe, saldrá este mensaje
+
             if (!sc.hasNextInt())
             {
                 System.out.println("¡Error! Introduce un número válido del 1 al 4.");
@@ -36,22 +37,24 @@ public class Juego
             switch (opcionMenu)
             {
                 case 1:
-                    
+                    iniciarNuevaPartida(sc);
                     break;
                 
                 case 2:
-                    
+                    System.out.println("Falta poner el ranking");
                     break;
 
                 case 3:
-                    
+                    ayudaMenu();
                     break;
 
                 case 4:
-                    
+                    System.out.println("¡Gracias por jugar a El Torneo de la Arena Gestral! Hasta pronto.");
+                    juegoActivo = false;
                     break;
             
                 default:
+                    System.out.println("Opción invalida.");
                     break;
             }
         }
@@ -60,7 +63,7 @@ public class Juego
 
     //Texto que saldrá al elegir la opción de ayuda en el menú
 
-    public void ayudaMenu()
+    public static void ayudaMenu()
     {
         System.out.println("1.- Reglas y funcionamiento del juego:");
         System.out.println("");
@@ -72,7 +75,7 @@ public class Juego
 
     //Nombre personalizado que se verá en el ranking final
 
-    public void eleccionNombre(String nombreRanking)
+    public static void eleccionNombre(String nombreRanking)
     {
         Scanner sc = new Scanner(System.in);
 
@@ -88,12 +91,15 @@ public class Juego
     {
         while (heroe.getVidaActual() > 0 && enemigo.getVidaActual() > 0)
         {
+            System.out.println("==============================================");
             System.out.println("Tu vida: " + heroe.getVidaActual() + " | Elixires disponibles: " + pociones.getCantidad());
             System.out.println("Vida de " + enemigo.getNombre() + ": " + enemigo.getVidaActual());
+            System.out.println("==============================================");
             System.out.println("¿Qué quieres hacer?");
             System.out.println("1. Atacar");
             System.out.println("2. Usar poción: " + pociones.getNombrePoti());
             System.out.println("3. Abandonar partida");
+            System.out.println("==============================================");
             System.out.print("Opción: ");
 
             //En caso de que no se elija bien ninguna de las opciones, saldrá este texto
@@ -113,6 +119,7 @@ public class Juego
             switch (accion)
             {
                 //La primera opción sirve para atacar al enemigo
+
                 case 1:
                     int danoHeroe = (int) (Math.random() * (heroe.getAtaqueMax() - heroe.getAtaqueMin() + 1)) + heroe.getAtaqueMin();
                     enemigo.setVidaActual(Math.max(0, enemigo.getVidaActual() - danoHeroe));
@@ -121,19 +128,26 @@ public class Juego
                     break;
 
                 //La segunda opción sirve para usar una poción
+
                 case 2:
+
                     //En caso de que no te queden pociones saldra este texto
+
                     if (pociones.getCantidad() <= 0)
                     {
                         System.out.println("No te quedan " + pociones.getNombrePotiPlural());
                         turnoConsumido = false;
+
                     //En caso de tener la vida al máximo saldrá este texto
+
                     }
                     else if (heroe.getVidaActual() >= heroe.getVidaMax())
                     {
                         System.out.println("Ya tienes la vida al máximo");
                         turnoConsumido = false;
+
                     //En caso de poder usarse la poción
+
                     }
                     else
                     {
@@ -148,6 +162,7 @@ public class Juego
                     break;
                     
                 //La tercera opción es el texto que saldrá en caso de que abandones la partida
+
                 case 3:
                     System.out.println("Has abandonado la aventura.");
                     return false;
@@ -159,6 +174,7 @@ public class Juego
             }
 
             //Si el enemigo sigue vivo y se acaba tu turno, el te ataca
+
             if (turnoConsumido && enemigo.getVidaActual() > 0)
             {
                 int danoEnemigo = (int) (Math.random() * (enemigo.getAtaqueMax() - enemigo.getAtaqueMin() + 1)) + enemigo.getAtaqueMin();
@@ -168,6 +184,7 @@ public class Juego
         }
 
         //En caso de morir devolverá un false
+
         if (heroe.getVidaActual() <= 0)
         {
             System.out.println("Has caído ante " + enemigo.getNombre());
@@ -178,10 +195,12 @@ public class Juego
     }
 
     //Inicio de nueva partida y los tres combates contra los enemigos
-    public void iniciarNuevaPartida(Scanner sc)
+
+    public static void iniciarNuevaPartida(Scanner sc)
     {
         System.out.print("Elige el nombre que quieres usar visible en el ranking: ");
         //Estos dos métodos son nativos del String. trim() elemina espacios en blanco y isEmpty() comprueba si está vacío
+
         String nombreJugador = sc.nextLine();
         if (nombreJugador.trim().isEmpty())
         {
@@ -191,12 +210,15 @@ public class Juego
         iniciacicionPrimerCombate();
 
         //Volvemos a darle valores al protagonista para que cada vez que se inicie una nueva partida tenga estas mismos valores predefinidos
-        Protagonista heroe = new Protagonista(nombreJugador, 100, 100, 10, 20);
+
+        Protagonista heroe = new Protagonista(nombreJugador, 120, 120, 10, 20);
 
         //Creamos el inventario donde se guardarán las pociones
+
         Curacion inventarioPociones = new Curacion("elixir de croma mediano", "elixires de croma medianos", 25, 3);
 
         //Aquí definimos a los tres enemigos creados en orden de dificultad
+
         Enemigo[] enemigos =
         {
             new Enemigo("Nevron", 70, 70, 10, 15, 100),
@@ -209,9 +231,11 @@ public class Juego
         boolean victoriaCompleta = false;
 
         //Bucle para recorrer los 3 combates seguidos
+
         for (int i = 0; i < enemigos.length && !partidaTerminada; i++)
         {
             //Depende del valor de i, mostrará una narrativa u otra
+
             switch (i) 
             {
                 case 0: iniciacicionPrimerCombate(); break;
@@ -234,6 +258,7 @@ public class Juego
                 System.out.println("¡Has vencido a " + enemigoActual.getNombre() + "!");
                 
                 //Si es el último combate y se gana, sale el texto de la victoria final
+
                 if (i == enemigos.length - 1)
                 {
                     victoriaCompleta = true;
@@ -241,7 +266,9 @@ public class Juego
                 }
             }
         }
+
         //Calculamos los puntos conseguidos por cada enemigo y se le suma la vida en caso de haber ganado todos los combates
+
         int puntuacionFinal = enemigosDerrotados * 100;
         if (victoriaCompleta)
         {
@@ -286,6 +313,7 @@ public class Juego
     }
 
     //Transición entre el segundo y tercer combate
+
     public static void transicionTercerCombate()
     {
         System.out.println("El Nevron Volador cae rendido al suelo");
@@ -297,6 +325,7 @@ public class Juego
     }
 
     //Victoria después del tercer combate
+
     public static void victoriaFinal()
     {
         System.out.println("¡VICTORIA! Has logrado derrotar a Petank");
@@ -315,7 +344,7 @@ public class Juego
     {
         try
         {
-            Thread.sleep(2000);
+            Thread.sleep(milisegundos);
         }
         catch(InterruptedException e)
         {

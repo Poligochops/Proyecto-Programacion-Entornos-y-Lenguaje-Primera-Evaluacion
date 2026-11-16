@@ -25,7 +25,7 @@ public class Protagonista extends Personaje
     public static void main(String[] args)
     {
 
-        Protagonista Gustave = new Protagonista ("Gustave", 100, 100, 10, 20);
+        Protagonista Gustave = new Protagonista ("Gustave", 120, 120, 12, 25);
 
         System.out.println("---------------------------");
         Gustave.mostrarDatos();
