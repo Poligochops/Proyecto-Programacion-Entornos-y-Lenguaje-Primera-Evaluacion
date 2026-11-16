@@ -8,14 +8,30 @@ public class Juego
 
         boolean juegoActivo = true;
 
-        //Menú
-
-        System.out.println("Selecciona tu siguiente paso");
-        System.out.println("(1: Nueva partida, 2: Ranking, 3: Ayuda, 4: Salir):");
-        int opcionMenu = sc.nextInt();
-
         do
         {
+            //Menú
+            
+            System.out.println("========================================");
+            System.out.println("     El TORNEO DE LA ARENA GESTRAL  ");
+            System.out.println("========================================");
+            System.out.println("Selecciona tu siguiente paso:");
+            System.out.println("1: Nueva partida");
+            System.out.println("2: Ranking");
+            System.out.println("3: Ayuda");
+            System.out.println("4: Salir");
+            System.out.print("Opción: ");
+
+            // En caso de que no sea un número lo que se escribe, saldrá este mensaje
+            if (!sc.hasNextInt()) {
+                System.out.println("¡Error! Introduce un número válido del 1 al 4.");
+                sc.next();
+                continue;
+            }
+
+            int opcionMenu = sc.nextInt();
+            sc.nextLine();
+
             switch (opcionMenu) {
                 case 1:
                     
