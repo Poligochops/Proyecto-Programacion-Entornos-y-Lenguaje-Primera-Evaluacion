@@ -23,7 +23,8 @@ public class Juego
             System.out.print("Opción: ");
 
             //En caso de que no sea un número lo que se escribe, saldrá este mensaje
-            if (!sc.hasNextInt()) {
+            if (!sc.hasNextInt())
+            {
                 System.out.println("¡Error! Introduce un número válido del 1 al 4.");
                 sc.next();
                 continue;
@@ -32,7 +33,8 @@ public class Juego
             int opcionMenu = sc.nextInt();
             sc.nextLine();
 
-            switch (opcionMenu) {
+            switch (opcionMenu)
+            {
                 case 1:
                     
                     break;
@@ -84,19 +86,21 @@ public class Juego
 
     public static boolean simularCombate(Scanner sc, Protagonista heroe, Enemigo enemigo, Curacion pociones)
     {
-        while (heroe.getVidaActual() > 0 && enemigo.getVidaActual() > 0) {
+        while (heroe.getVidaActual() > 0 && enemigo.getVidaActual() > 0)
+            {
             System.out.println("----------------------------------------");
-            System.out.println("Tu vida: " + heroe.getVidaActual() + "/" + heroe.getVidaMax() + " | Elixires disponibles: " + pociones.getCantidad());
-            System.out.println("Vida de " + enemigo.getNombre() + ": " + enemigo.getVidaActual() + "/" + enemigo.getVidaMax());
+            System.out.println("Tu vida: " + heroe.getVidaActual() + " | Elixires disponibles: " + pociones.getCantidad());
+            System.out.println("Vida de " + enemigo.getNombre() + ": " + enemigo.getVidaActual());
             System.out.println("¿Qué quieres hacer?");
             System.out.println("1. Atacar");
-            System.out.println("2. Usar poción (" + pociones.getNombrePoti() + ")");
+            System.out.println("2. Usar poción: " + pociones.getNombrePoti());
             System.out.println("3. Abandonar partida");
             System.out.print("Opción: ");
 
             //En caso de que no se elija bien ninguna de las opciones, saldrá este texto
 
-            if (!sc.hasNextInt()) {
+            if (!sc.hasNextInt())
+            {
                 System.out.println("Opción inválida. Introduce 1, 2 o 3.");
                 sc.next();
                 continue;
@@ -107,7 +111,8 @@ public class Juego
 
             boolean turnoConsumido = false;
 
-            switch (accion) {
+            switch (accion)
+            {
                 //La primera opción sirve para atacar al enemigo
                 case 1:
                     int danoHeroe = (int) (Math.random() * (heroe.getAtaqueMax() - heroe.getAtaqueMin() + 1)) + heroe.getAtaqueMin();
@@ -119,15 +124,20 @@ public class Juego
                 //La segunda opción sirve para usar una poción
                 case 2:
                     //En caso de que no te queden pociones saldra este texto
-                    if (pociones.getCantidad() <= 0) {
+                    if (pociones.getCantidad() <= 0)
+                    {
                         System.out.println("No te quedan " + pociones.getNombrePotiPlural());
                         turnoConsumido = false;
                     //En caso de tener la vida al máximo saldrá este texto
-                    } else if (heroe.getVidaActual() >= heroe.getVidaMax()) {
+                    }
+                    else if (heroe.getVidaActual() >= heroe.getVidaMax())
+                    {
                         System.out.println("Ya tienes la vida al máximo");
                         turnoConsumido = false;
                     //En caso de poder usarse la poción
-                    } else {
+                    }
+                    else
+                    {
                         int nuevaVida = Math.min(heroe.getVidaMax(), heroe.getVidaActual() + pociones.getCuracionVida());
                         heroe.setVidaActual(nuevaVida);
                         pociones.setCantidad(pociones.getCantidad() - 1);
@@ -150,7 +160,8 @@ public class Juego
             }
 
             //Si el enemigo sigue vivo y se acaba tu turno, el te ataca
-            if (turnoConsumido && enemigo.getVidaActual() > 0) {
+            if (turnoConsumido && enemigo.getVidaActual() > 0)
+            {
                 int danoEnemigo = (int) (Math.random() * (enemigo.getAtaqueMax() - enemigo.getAtaqueMin() + 1)) + enemigo.getAtaqueMin();
                 heroe.setVidaActual(Math.max(0, heroe.getVidaActual() - danoEnemigo));
                 System.out.println(enemigo.getNombre() + " contraataca y te hace " + danoEnemigo + " de daño");
@@ -158,7 +169,8 @@ public class Juego
         }
 
         //En caso de morir devolverá un false
-        if (heroe.getVidaActual() <= 0) {
+        if (heroe.getVidaActual() <= 0)
+        {
             System.out.println("Has caído ante " + enemigo.getNombre());
             return false;
         }
@@ -181,6 +193,42 @@ public class Juego
         pausaTiempo(2000);
         System.out.println("");
         System.out.println("Preparate ahí viene tu primer adversario.");
+    }
+
+    //Transición entre el primer y segundo combate
+
+    public void transicionSegundoCombate()
+    {
+        System.out.println("Has derrotado al Nevron, pero el aire comienza a volverse denso...");
+        pausaTiempo(1500);
+        System.out.println("Un sonido agudo corta el silencio. Una sombra flotante se precipita desde el cielo.");
+        pausaTiempo(2000);
+        System.out.println("Es el Nevron Volador, prepárate para el siguiente asalto.");
+        pausaTiempo(2000);
+    }
+
+    //Transición entre el segundo y tercer combate
+    public void transicionTercerCombate()
+    {
+        System.out.println("El Nevron Volador cae rendido al suelo");
+        pausaTiempo(1500);
+        System.out.println("La tierra comienza a temblar bajo tus pies. Un coloso pesado emerge de las profundidades.");
+        pausaTiempo(2000);
+        System.out.println("Es un Petank, una gran bola de metal acorazado. Este es tu combate más duro.");
+        pausaTiempo(2000);
+    }
+
+    //Victoria después del tercer combate
+    public void victoriaFinal()
+    {
+        System.out.println("¡VICTORIA! Has logrado derrotar a Petank");
+        pausaTiempo(1500);
+        System.out.println("Golgra, la líder de los gestrales te da la enorabuena por tu gran perseverancia.");
+        pausaTiempo(2000);
+        System.out.println("Como recompensa, te da una peluca parecida a sus pelos en forma de brocha de pincel.");
+        pausaTiempo(2000);
+        System.out.println("Sabes que nunca la usarás, pero aun así estas contento de haber completado el torneo.");
+        pausaTiempo(2000);
     }
 
     //Método para hacer pausas entre SOUTs
