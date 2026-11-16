@@ -65,12 +65,15 @@ public class Juego
 
     public static void ayudaMenu()
     {
+        System.out.println("=============================================================================================");
         System.out.println("1.- Reglas y funcionamiento del juego:");
         System.out.println("");
         System.out.println("· El juego consistirá en tres combates seguidos.");
         System.out.println("· Tu personaje tendrá 100 de vida máxima y un daño de entre 10 y 20.");
         System.out.println("· Contarás con 3 pociones, cada una con la capacidad de curarte 25 de vida.");
         System.out.println("· Cada enemigo soltará 100 puntos, que se apuntarán junto al nombre que elijas al ranking.");
+        System.out.println("=============================================================================================");
+        System.out.println("");
     }
 
     //Nombre personalizado que se verá en el ranking final
@@ -211,7 +214,7 @@ public class Juego
 
         //Volvemos a darle valores al protagonista para que cada vez que se inicie una nueva partida tenga estas mismos valores predefinidos
 
-        Protagonista heroe = new Protagonista(nombreJugador, 120, 120, 10, 20);
+        Protagonista heroe = new Protagonista(nombreJugador, 120, 120, 12, 25);
 
         //Creamos el inventario donde se guardarán las pociones
 
@@ -223,7 +226,7 @@ public class Juego
         {
             new Enemigo("Nevron", 70, 70, 10, 15, 100),
             new Enemigo("Nevron Volador", 50, 50, 15, 20, 100),
-            new Enemigo("Petank", 200, 200, 8, 12, 100)
+            new Enemigo("Petank", 150, 150, 8, 12, 100)
         };
 
         int enemigosDerrotados = 0;
@@ -287,6 +290,7 @@ public class Juego
 
     public static void iniciacicionPrimerCombate()
     {
+        System.out.println("=========================================================================================");
         System.out.println("Has sido invitado a la arena gestral, donde extraordinarias criaturas");
         System.out.println("(los gestrales) con un pelo parecido a un pincel combaten por puro gusto.");
         pausaTiempo(3000);
@@ -298,44 +302,58 @@ public class Juego
         pausaTiempo(2000);
         System.out.println("");
         System.out.println("Preparate ahí viene tu primer adversario.");
+        System.out.println("=========================================================================================");
     }
 
     //Transición entre el primer y segundo combate
 
     public static void transicionSegundoCombate()
     {
+        System.out.println("=========================================================================================");
         System.out.println("Has derrotado al Nevron, pero el aire comienza a volverse denso...");
         pausaTiempo(1500);
+        System.out.println("");
         System.out.println("Un sonido agudo corta el silencio. Una sombra flotante se precipita desde el cielo.");
         pausaTiempo(2000);
+        System.out.println("");
         System.out.println("Es el Nevron Volador, prepárate para el siguiente asalto.");
         pausaTiempo(2000);
+        System.out.println("=========================================================================================");
     }
 
     //Transición entre el segundo y tercer combate
 
     public static void transicionTercerCombate()
     {
+        System.out.println("=========================================================================================");
         System.out.println("El Nevron Volador cae rendido al suelo");
         pausaTiempo(1500);
+        System.out.println("");
         System.out.println("La tierra comienza a temblar bajo tus pies. Un coloso pesado emerge de las profundidades.");
         pausaTiempo(2000);
+        System.out.println("");
         System.out.println("Es un Petank, una gran bola de metal acorazado. Este es tu combate más duro.");
         pausaTiempo(2000);
+        System.out.println("=========================================================================================");
     }
 
     //Victoria después del tercer combate
 
     public static void victoriaFinal()
     {
+        System.out.println("=========================================================================================");
         System.out.println("¡VICTORIA! Has logrado derrotar a Petank");
         pausaTiempo(1500);
+        System.out.println("");
         System.out.println("Golgra, la líder de los gestrales te da la enorabuena por tu gran perseverancia.");
         pausaTiempo(2000);
+        System.out.println("");
         System.out.println("Como recompensa, te da una peluca parecida a sus pelos en forma de brocha de pincel.");
         pausaTiempo(2000);
+        System.out.println("");
         System.out.println("Sabes que nunca la usarás, pero aun así estas contento de haber completado el torneo.");
         pausaTiempo(2000);
+        System.out.println("=========================================================================================");
     }
 
     //Método para hacer pausas entre SOUTs

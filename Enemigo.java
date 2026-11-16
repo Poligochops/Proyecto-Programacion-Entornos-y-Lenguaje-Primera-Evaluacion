@@ -42,7 +42,7 @@ public class Enemigo extends Personaje
 
         Enemigo Nevron = new Enemigo ("Nevron", 70, 70, 10, 15, 100);
         Enemigo NevronVolador = new Enemigo ("Nevron Volador", 50, 50, 15, 20, 100);
-        Enemigo Petank = new Enemigo ("Petank", 130, 130, 8, 12, 100);
+        Enemigo Petank = new Enemigo ("Petank", 150, 150, 8, 12, 100);
 
         System.out.println("---------------------------");
         Nevron.mostrarDatos();
