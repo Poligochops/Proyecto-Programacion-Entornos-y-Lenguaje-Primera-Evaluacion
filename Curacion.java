@@ -6,18 +6,15 @@ public class Curacion
     private String nombrePotiPlural;
     private int curacionVida;
     private int cantidad;
-    private int nivelPoti;
 
     //Constructores
 
-    public Curacion (String nombrePoti,String nombrePotiPlural, int curacionVida, int cantidad, int nivelPoti)
+    public Curacion (String nombrePoti,String nombrePotiPlural, int curacionVida, int cantidad)
     {
         this.nombrePoti = nombrePoti;
         this.nombrePotiPlural = nombrePotiPlural;
         this.curacionVida = curacionVida;
         this.cantidad = cantidad;
-        this.nivelPoti = nivelPoti;
-
     }
     
     //Métodos
@@ -62,26 +59,11 @@ public class Curacion
         this.cantidad = cantidad;
     }
 
-    public int getNivelPoti() {
-        return nivelPoti;
-    }
-
-    public void setNivelPoti(int nivelPoti) {
-        this.nivelPoti = nivelPoti;
-    }
-
     public static void main(String[] args)
     {
-        Curacion chiquiPocion = new Curacion ("elixir de croma pequeño", "elixires de croma pequeños", 10, 5, 1);
-        Curacion mediumPocion = new Curacion ("elixir de croma mediano", "elixires de croma medianos", 25, 3, 1);
-        Curacion gigaPocion = new Curacion ("elixir de croma grande", "elixires de croma grandes", 60, 1, 1);
+        Curacion mediumPocion = new Curacion ("elixir de croma mediano", "elixires de croma medianos", 25, 3);
 
         System.out.println("-----------------------------------------------------");
-        chiquiPocion.mostrarDatos();
-        System.out.println("-----------------------------------------------------");
         mediumPocion.mostrarDatos();
-        System.out.println("-----------------------------------------------------");
-        gigaPocion.mostrarDatos();
-        System.out.println("-----------------------------------------------------");
     }
 }

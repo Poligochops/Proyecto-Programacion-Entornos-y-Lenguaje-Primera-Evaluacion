@@ -1,15 +1,11 @@
 public class Protagonista extends Personaje
 {
-    //Atributos
-
-    int nivel;
 
     //Contructores
 
-    public Protagonista(String nombre, int vidaMax, int vidaActual, int ataqueMin, int ataqueMax, int nivel)
+    public Protagonista(String nombre, int vidaMax, int vidaActual, int ataqueMin, int ataqueMax)
     {
         super(nombre, vidaMax, vidaActual, ataqueMin, ataqueMax);
-        this.nivel = nivel;
     }
 
     //Métodos
@@ -22,17 +18,6 @@ public class Protagonista extends Personaje
         System.out.println("Vida Actual: " + getVidaActual());
         System.out.println("Daño mínimo: " + getAtaqueMin());
         System.out.println("Daño máximo: " + getAtaqueMax());
-        System.out.println("Nivel: " + nivel);
-    }
-
-    //Getters y Setters
-
-    public int getNivel() {
-        return nivel;
-    }
-
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
     }
 
     //Mostrar los datos
@@ -40,7 +25,7 @@ public class Protagonista extends Personaje
     public static void main(String[] args)
     {
 
-        Protagonista Gustave = new Protagonista ("Gustave", 100, 100, 10, 20, 1);
+        Protagonista Gustave = new Protagonista ("Gustave", 100, 100, 10, 20);
 
         System.out.println("---------------------------");
         Gustave.mostrarDatos();
