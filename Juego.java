@@ -178,6 +178,76 @@ public class Juego
         return true;
     }
 
+    //Inicio de nueva partida y los tres combates contra los enemigos
+    public void iniciarNuevaPartida(Scanner sc)
+    {
+        System.out.print("Elige el nombre que quieres usar visible en el ranking: ");
+        //Estos dos métodos son nativos del String. trim() elemina espacios en blanco y isEmpty() comprueba si está vacío
+        String nombreJugador = sc.nextLine();
+        if (nombreJugador.trim().isEmpty())
+        {
+            nombreJugador = "GustaveAnónimo";
+        }
+
+        iniciacicionPrimerCombate();
+
+        //Volvemos a darle valores al protagonista para que cada vez que se inicie una nueva partida tenga estas mismos valores predefinidos
+        Protagonista heroe = new Protagonista(nombreJugador, 100, 100, 10, 20);
+
+        //Creamos el inventario donde se guardarán las pociones
+        Curacion inventarioPociones = new Curacion("elixir de croma mediano", "elixires de croma medianos", 25, 3);
+
+        //Aquí definimos a los tres enemigos creados en orden de dificultad
+        Enemigo[] enemigos =
+        {
+            new Enemigo("Nevron", 70, 70, 10, 15, 100),
+            new Enemigo("Nevron Volador", 50, 50, 15, 20, 100),
+            new Enemigo("Petank", 200, 200, 8, 12, 100)
+        };
+
+        int enemigosDerrotados = 0;
+        boolean partidaTerminada = false;
+        boolean victoriaCompleta = false;
+
+        //Bucle para recorrer los 3 combates seguidos
+        for (int i = 0; i < enemigos.length && !partidaTerminada; i++)
+        {
+            Enemigo enemigoActual = enemigos[i];
+            System.out.println("Combate " + (i + 1) + ": Te enfrentas a " + enemigoActual.getNombre());
+            
+            boolean enemigoDerrotado = simularCombate(sc, heroe, enemigoActual, inventarioPociones);
+
+            if (!enemigoDerrotado)
+            {
+                //En caso de morir o huir, se acaba la partida
+                partidaTerminada = true;
+            }
+            else
+            {
+                enemigosDerrotados++;
+                System.out.println("¡Has vencido a " + enemigoActual.getNombre() + "!");
+                if (i == enemigos.length - 1)
+                {
+                    victoriaCompleta = true;
+                }
+            }
+        }
+
+        //Calculamos los puntos conseguidos por cada enemigo y se le suma la vida en caso de haber ganado todos los combates
+        int puntuacionFinal = enemigosDerrotados * 100;
+        if (victoriaCompleta)
+        {
+            puntuacionFinal += heroe.getVidaActual();
+            System.out.println("\n¡VICTORIA TOTAL! Has completado la aventura gestral.");
+        }
+        else
+        {
+            System.out.println("\nFin de la partida. Enemigos derrotados: " + enemigosDerrotados);
+        }
+
+        System.out.println("Tu puntuación final ha sido: " + puntuacionFinal);
+    }
+
     //Texto anterior al primer combate
 
     public void iniciacicionPrimerCombate()
