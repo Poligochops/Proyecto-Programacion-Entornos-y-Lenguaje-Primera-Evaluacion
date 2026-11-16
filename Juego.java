@@ -87,8 +87,7 @@ public class Juego
     public static boolean simularCombate(Scanner sc, Protagonista heroe, Enemigo enemigo, Curacion pociones)
     {
         while (heroe.getVidaActual() > 0 && enemigo.getVidaActual() > 0)
-            {
-            System.out.println("----------------------------------------");
+        {
             System.out.println("Tu vida: " + heroe.getVidaActual() + " | Elixires disponibles: " + pociones.getCantidad());
             System.out.println("Vida de " + enemigo.getNombre() + ": " + enemigo.getVidaActual());
             System.out.println("¿Qué quieres hacer?");
@@ -212,6 +211,14 @@ public class Juego
         //Bucle para recorrer los 3 combates seguidos
         for (int i = 0; i < enemigos.length && !partidaTerminada; i++)
         {
+            //Depende del valor de i, mostrará una narrativa u otra
+            switch (i) 
+            {
+                case 0: iniciacicionPrimerCombate(); break;
+                case 1: transicionSegundoCombate(); break;
+                case 2: transicionTercerCombate(); break;
+            }
+
             Enemigo enemigoActual = enemigos[i];
             System.out.println("Combate " + (i + 1) + ": Te enfrentas a " + enemigoActual.getNombre());
             
@@ -219,30 +226,31 @@ public class Juego
 
             if (!enemigoDerrotado)
             {
-                //En caso de morir o huir, se acaba la partida
                 partidaTerminada = true;
             }
             else
             {
                 enemigosDerrotados++;
                 System.out.println("¡Has vencido a " + enemigoActual.getNombre() + "!");
+                
+                //Si es el último combate y se gana, sale el texto de la victoria final
                 if (i == enemigos.length - 1)
                 {
                     victoriaCompleta = true;
+                    victoriaFinal();
                 }
             }
         }
-
         //Calculamos los puntos conseguidos por cada enemigo y se le suma la vida en caso de haber ganado todos los combates
         int puntuacionFinal = enemigosDerrotados * 100;
         if (victoriaCompleta)
         {
             puntuacionFinal += heroe.getVidaActual();
-            System.out.println("\n¡VICTORIA TOTAL! Has completado la aventura gestral.");
+            System.out.println("¡VICTORIA TOTAL! Has completado la aventura gestral.");
         }
         else
         {
-            System.out.println("\nFin de la partida. Enemigos derrotados: " + enemigosDerrotados);
+            System.out.println("Fin de la partida. Enemigos derrotados: " + enemigosDerrotados);
         }
 
         System.out.println("Tu puntuación final ha sido: " + puntuacionFinal);
@@ -250,7 +258,7 @@ public class Juego
 
     //Texto anterior al primer combate
 
-    public void iniciacicionPrimerCombate()
+    public static void iniciacicionPrimerCombate()
     {
         System.out.println("Has sido invitado a la arena gestral, donde extraordinarias criaturas");
         System.out.println("(los gestrales) con un pelo parecido a un pincel combaten por puro gusto.");
@@ -267,7 +275,7 @@ public class Juego
 
     //Transición entre el primer y segundo combate
 
-    public void transicionSegundoCombate()
+    public static void transicionSegundoCombate()
     {
         System.out.println("Has derrotado al Nevron, pero el aire comienza a volverse denso...");
         pausaTiempo(1500);
@@ -278,7 +286,7 @@ public class Juego
     }
 
     //Transición entre el segundo y tercer combate
-    public void transicionTercerCombate()
+    public static void transicionTercerCombate()
     {
         System.out.println("El Nevron Volador cae rendido al suelo");
         pausaTiempo(1500);
@@ -289,7 +297,7 @@ public class Juego
     }
 
     //Victoria después del tercer combate
-    public void victoriaFinal()
+    public static void victoriaFinal()
     {
         System.out.println("¡VICTORIA! Has logrado derrotar a Petank");
         pausaTiempo(1500);
@@ -303,7 +311,7 @@ public class Juego
 
     //Método para hacer pausas entre SOUTs
 
-    public void pausaTiempo(int milisegundos)
+    public static void pausaTiempo(int milisegundos)
     {
         try
         {
