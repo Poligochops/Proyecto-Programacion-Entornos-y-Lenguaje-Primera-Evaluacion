@@ -10,6 +10,18 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+# Carpetas bin y target
+bin/
+target/
+
+# Configuración local del IDE
+.vscode/
+.idea/
+*.iml
+.settings/
+.project
+.classpath
+
 # Package Files #
 *.jar
 *.war

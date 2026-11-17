@@ -83,18 +83,6 @@ public class Juego
         System.out.println("");
     }
 
-    //Nombre personalizado que se verá en el ranking final
-
-    public static void eleccionNombre(String nombreRanking)
-    {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.println("Elige el nombre que quieres usar visible en el ranking:");
-        nombreRanking = sc.nextLine();
-
-        sc.close();
-    }
-
     //Simular los combates por turnos
 
     public static boolean simularCombate(Scanner sc, Protagonista heroe, Enemigo enemigo, Curacion pociones)
@@ -208,7 +196,10 @@ public class Juego
 
     public static int iniciarNuevaPartida(Scanner sc, String[] nombresRanking, int[] puntosRanking, int totalRegistros)
     {
+        //Nombre personalizado que se verá en el ranking final
+
         System.out.print("Elige el nombre que quieres usar visible en el ranking: ");
+        
         //Estos dos métodos son nativos del String. trim() elemina espacios en blanco y isEmpty() comprueba si está vacío
 
         String nombreJugador = sc.nextLine();

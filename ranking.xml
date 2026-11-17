@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <ranking>
+    <jugador posicion="1">
+        <nombre>Biel</nombre>
+        <puntuacion>306</puntuacion>
+    </jugador>
+    <jugador posicion="2">
+        <nombre>Biel</nombre>
+        <puntuacion>200</puntuacion>
+    </jugador>
 </ranking>
