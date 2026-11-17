@@ -1,0 +1,5 @@
+<!ELEMENT ranking (jugador*)>
+<!ELEMENT jugador (nombre, puntuacion)>
+<!ATTLIST jugador posicion CDATA #REQUIRED>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT puntuacion (#PCDATA)>

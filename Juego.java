@@ -8,6 +8,13 @@ public class Juego
 
         boolean juegoActivo = true;
 
+        //Las siguientes tres lineas crean los dos arrays paralelos de 10 posiciones
+        //Fuera del do por que si no al volver a jugar se borrarían los registros anteriores
+
+        String[] nombresRanking = new String[10];
+        int[] puntosRanking = new int[10];
+        int totalRegistros = RankingXML.cargarXML(nombresRanking, puntosRanking);
+
         do
         {
             //Menú
@@ -37,11 +44,11 @@ public class Juego
             switch (opcionMenu)
             {
                 case 1:
-                    iniciarNuevaPartida(sc);
+                    totalRegistros = iniciarNuevaPartida(sc, nombresRanking, puntosRanking, totalRegistros);
                     break;
                 
                 case 2:
-                    System.out.println("Falta poner el ranking");
+                    RankingXML.mostrarRanking(nombresRanking, puntosRanking, totalRegistros);   
                     break;
 
                 case 3:
@@ -199,7 +206,7 @@ public class Juego
 
     //Inicio de nueva partida y los tres combates contra los enemigos
 
-    public static void iniciarNuevaPartida(Scanner sc)
+    public static int iniciarNuevaPartida(Scanner sc, String[] nombresRanking, int[] puntosRanking, int totalRegistros)
     {
         System.out.print("Elige el nombre que quieres usar visible en el ranking: ");
         //Estos dos métodos son nativos del String. trim() elemina espacios en blanco y isEmpty() comprueba si está vacío
@@ -209,8 +216,6 @@ public class Juego
         {
             nombreJugador = "GustaveAnónimo";
         }
-
-        iniciacicionPrimerCombate();
 
         //Volvemos a darle valores al protagonista para que cada vez que se inicie una nueva partida tenga estas mismos valores predefinidos
 
@@ -284,6 +289,9 @@ public class Juego
         }
 
         System.out.println("Tu puntuación final ha sido: " + puntuacionFinal);
+
+        totalRegistros = RankingXML.actualizarRanking(nombresRanking, puntosRanking, totalRegistros, nombreJugador, puntuacionFinal);
+        return totalRegistros;
     }
 
     //Texto anterior al primer combate
@@ -345,7 +353,7 @@ public class Juego
         System.out.println("¡VICTORIA! Has logrado derrotar a Petank");
         pausaTiempo(1500);
         System.out.println("");
-        System.out.println("Golgra, la líder de los gestrales te da la enorabuena por tu gran perseverancia.");
+        System.out.println("Golgra, la líder de los gestrales te da la enhorabuena por tu gran perseverancia.");
         pausaTiempo(2000);
         System.out.println("");
         System.out.println("Como recompensa, te da una peluca parecida a sus pelos en forma de brocha de pincel.");
