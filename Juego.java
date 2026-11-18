@@ -13,7 +13,7 @@ public class Juego
 
         String[] nombresRanking = new String[10];
         int[] puntosRanking = new int[10];
-        int totalRegistros = RankingXML.cargarXML(nombresRanking, puntosRanking);
+        int totalRegistros = rankingXML.cargarXML(nombresRanking, puntosRanking);
 
         do
         {
@@ -48,7 +48,7 @@ public class Juego
                     break;
                 
                 case 2:
-                    RankingXML.mostrarRanking(nombresRanking, puntosRanking, totalRegistros);   
+                    rankingXML.mostrarRanking(nombresRanking, puntosRanking, totalRegistros);   
                     break;
 
                 case 3:
@@ -281,7 +281,7 @@ public class Juego
 
         System.out.println("Tu puntuación final ha sido: " + puntuacionFinal);
 
-        totalRegistros = RankingXML.actualizarRanking(nombresRanking, puntosRanking, totalRegistros, nombreJugador, puntuacionFinal);
+        totalRegistros = rankingXML.actualizarRanking(nombresRanking, puntosRanking, totalRegistros, nombreJugador, puntuacionFinal);
         return totalRegistros;
     }
 
