@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE ranking SYSTEM "ranking.dtd">
 <ranking>
     <jugador posicion="1">
+        <nombre>PCC</nombre>
+        <puntuacion>317</puntuacion>
+    </jugador>
+    <jugador posicion="2">
+        <nombre>Hola</nombre>
+        <puntuacion>316</puntuacion>
+    </jugador>
+    <jugador posicion="3">
         <nombre>Biel</nombre>
         <puntuacion>306</puntuacion>
     </jugador>
-    <jugador posicion="2">
+    <jugador posicion="4">
+        <nombre>gr</nombre>
+        <puntuacion>306</puntuacion>
+    </jugador>
+    <jugador posicion="5">
         <nombre>Biel</nombre>
         <puntuacion>200</puntuacion>
     </jugador>

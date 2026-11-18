@@ -2,6 +2,9 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:template match="/">
         <html>
+            <head>
+                <link rel="stylesheet" href="ranking.css"/>
+            </head>
             <body>
                 <h1>Ranking de la Arena Gestral</h1>
                 <table border="1">
