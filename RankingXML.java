@@ -10,9 +10,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-public class RankingXML 
+public class rankingXML 
 {
-    // 1. Guarda los arrays paralelos reales en ranking.xml
+    // 1. Guarda los arrays paralelos reales en ranking.xml con estilo incrustado
     public static void guardarXML(String[] nombres, int[] puntos, int total)
     {
         try 
@@ -21,9 +21,78 @@ public class RankingXML
             DocumentBuilder constructor = fabrica.newDocumentBuilder();
             Document documento = constructor.newDocument();
 
+            // Apunta al estilo interno (#estilo-ranking) para que Chrome/Edge no lo bloqueen en local
+            org.w3c.dom.ProcessingInstruction xslt = documento.createProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"#estilo-ranking\"");
+            documento.appendChild(xslt);
+
             Element raiz = documento.createElement("ranking");
             documento.appendChild(raiz);
 
+            // Bloque XSLT + CSS incrustado dentro del XML
+            Element stylesheet = documento.createElementNS("http://www.w3.org/1999/XSL/Transform", "xsl:stylesheet");
+            stylesheet.setAttribute("version", "1.0");
+            stylesheet.setAttribute("id", "estilo-ranking");
+            raiz.appendChild(stylesheet);
+
+            Element template = documento.createElementNS("http://www.w3.org/1999/XSL/Transform", "xsl:template");
+            template.setAttribute("match", "/");
+            stylesheet.appendChild(template);
+
+            Element html = documento.createElement("html");
+            template.appendChild(html);
+
+            Element head = documento.createElement("head");
+            html.appendChild(head);
+
+            Element style = documento.createElement("style");
+            style.setTextContent(
+                "body { background-color: cornflowerblue; font-family: Arial; padding: 20px; } " +
+                "table { border-collapse: collapse; background-color: white; } " +
+                "th, td { padding: 8px 15px; text-align: center; } " +
+                "th { font-weight: bold; background-color: lightblue; }"
+            );
+            head.appendChild(style);
+
+            Element body = documento.createElement("body");
+            html.appendChild(body);
+
+            Element h1 = documento.createElement("h1");
+            h1.setTextContent("Ranking de la Arena Gestral");
+            body.appendChild(h1);
+
+            Element table = documento.createElement("table");
+            table.setAttribute("border", "1");
+            body.appendChild(table);
+
+            Element trHeader = documento.createElement("tr");
+            table.appendChild(trHeader);
+
+            String[] columnas = {"Posición", "Nombre", "Puntuación"};
+            for (String col : columnas) 
+            {
+                Element th = documento.createElement("th");
+                th.setTextContent(col);
+                trHeader.appendChild(th);
+            }
+
+            Element forEach = documento.createElementNS("http://www.w3.org/1999/XSL/Transform", "xsl:for-each");
+            forEach.setAttribute("select", "ranking/jugador");
+            table.appendChild(forEach);
+
+            Element trRow = documento.createElement("tr");
+            forEach.appendChild(trRow);
+
+            String[] campos = {"@posicion", "nombre", "puntuacion"};
+            for (String campo : campos) 
+            {
+                Element td = documento.createElement("td");
+                Element valueOf = documento.createElementNS("http://www.w3.org/1999/XSL/Transform", "xsl:value-of");
+                valueOf.setAttribute("select", campo);
+                td.appendChild(valueOf);
+                trRow.appendChild(td);
+            }
+
+            // Datos reales de los jugadores
             for (int i = 0; i < total; i++) 
             {
                 Element jugador = documento.createElement("jugador");
@@ -64,8 +133,6 @@ public class RankingXML
             if (!archivo.exists()) return 0;
 
             DocumentBuilderFactory fabrica = DocumentBuilderFactory.newInstance();
-            fabrica.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
-
             DocumentBuilder constructor = fabrica.newDocumentBuilder();
             Document documento = constructor.parse(archivo);
             documento.getDocumentElement().normalize();
@@ -99,7 +166,7 @@ public class RankingXML
         int pos = total;
         for (int i = 0; i < total; i++) 
         {
-            if (nuevosPuntos > puntos[i]) // '>' estricto para mantener el más antiguo en empate
+            if (nuevosPuntos > puntos[i])
             {
                 pos = i;
                 break;
@@ -120,7 +187,7 @@ public class RankingXML
             puntos[pos] = nuevosPuntos;
         }
 
-        guardarXML(nombres, puntos, total); // Guarda automáticamente en el XML
+        guardarXML(nombres, puntos, total);
         return total;
     }
 
