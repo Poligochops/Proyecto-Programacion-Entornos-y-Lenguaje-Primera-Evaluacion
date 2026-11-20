@@ -12,7 +12,7 @@ Descripción del juego
 
         Petank (150 de vida | 8-12 de daño)
 
-    El jugador controla a un protagonist que cuenta con 120 puntos de vida, un ataque aleatorio de entre 12 y 25 puntos de daño, y un inventario con 3 elixires de croma medianos que curan 25 puntos de vida cada uno.
+    El jugador controla a un protagonista que cuenta con 120 puntos de vida, un ataque aleatorio de entre 12 y 25 puntos de daño, y un inventario con 3 elixires de croma medianos que curan 25 puntos de vida cada uno.
 
 Sistema de puntuación
 
